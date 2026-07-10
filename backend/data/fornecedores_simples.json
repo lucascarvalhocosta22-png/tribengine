@@ -1,0 +1,479 @@
+{
+  "00187154000134": {
+    "cnpj": "00187154000134",
+    "razao_social": "VIA LACTEA COMERCIO E REPRESENTACOES LTDA",
+    "fantasia": "",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:21:47"
+  },
+  "01837745000172": {
+    "cnpj": "01837745000172",
+    "razao_social": "E. PEDRO DO NASCIMENTO",
+    "fantasia": "",
+    "situacao": "ATIVA",
+    "simples_nacional": true,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:21:48"
+  },
+  "02372862000170": {
+    "cnpj": "02372862000170",
+    "razao_social": "DSB - DISTRIBUIDORA SUPER BARATAO LTDA",
+    "fantasia": "SUPER BARATAO",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:21:49"
+  },
+  "00212872000113": {
+    "cnpj": "00212872000113",
+    "razao_social": "ASA SUL INDUSTRIA E COMERCIO DE MALHAS LTDA",
+    "fantasia": "ASA SUL",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:44:59"
+  },
+  "03175564000153": {
+    "cnpj": "03175564000153",
+    "razao_social": "F J MELO MATERIAL DE CONSTRUCAO LTDA",
+    "fantasia": "",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:45:22"
+  },
+  "03840599000160": {
+    "cnpj": "03840599000160",
+    "razao_social": "CONCRETARIA BRASIL LTDA",
+    "fantasia": "CONCRETARIA BRASIL",
+    "situacao": "ATIVA",
+    "simples_nacional": true,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:45:44"
+  },
+  "05856773000198": {
+    "cnpj": "05856773000198",
+    "razao_social": "CV DISTRIBUIDORA DE ALIMENTOS LTDA",
+    "fantasia": "CAMPO VERDE",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:46:06"
+  },
+  "06174065000130": {
+    "cnpj": "06174065000130",
+    "razao_social": "OLIVEIRA & MARTINS MERCADINHO LTDA",
+    "fantasia": "SELETA CARNES",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:46:29"
+  },
+  "06337830000195": {
+    "cnpj": "06337830000195",
+    "razao_social": "J. NUNES DE OLIVEIRA",
+    "fantasia": "COPLAST FRASCOS E EMBALAGENS",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:46:51"
+  },
+  "07196033002141": {
+    "cnpj": "07196033002141",
+    "razao_social": "NORSA REFRIGERANTES S.A",
+    "fantasia": "NORSA",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:47:13"
+  },
+  "07204449000110": {
+    "cnpj": "07204449000110",
+    "razao_social": "COMERCIAL ROMA LTDA",
+    "fantasia": "",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:47:36"
+  },
+  "07228166000109": {
+    "cnpj": "07228166000109",
+    "razao_social": "COMERCIAL MAB LTDA",
+    "fantasia": "COMERCIAL MAB",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:47:58"
+  },
+  "07275571000420": {
+    "cnpj": "07275571000420",
+    "razao_social": "MIAMI COMERCIAL E TECNICA LTDA",
+    "fantasia": "",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:48:21"
+  },
+  "07570682000206": {
+    "cnpj": "07570682000206",
+    "razao_social": "SOLMAR DISTRIBUIDORA DE ALIMENTOS LTDA",
+    "fantasia": "",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:48:43"
+  },
+  "07634785000101": {
+    "cnpj": "07634785000101",
+    "razao_social": "COOPERATIVA AGRICOLA MISTA DE MARANGUAPE LTDA",
+    "fantasia": "",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:49:05"
+  },
+  "09075014000149": {
+    "cnpj": "09075014000149",
+    "razao_social": "PETISCO DISTRIBUIDORA DE ALIMENTOS LTDA",
+    "fantasia": "PETISCO",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:49:28"
+  },
+  "09317318000175": {
+    "cnpj": "09317318000175",
+    "razao_social": "FORTALI DISTRIBUIDORA DE ALIMENTOS LTDA.",
+    "fantasia": "FORTALI FOOD SERVICE",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:49:50"
+  },
+  "10483444000260": {
+    "cnpj": "10483444000260",
+    "razao_social": "ALVOAR LACTEOS NORDESTE S/A",
+    "fantasia": "BETANIA LACTEOS",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:50:12"
+  },
+  "11826690000159": {
+    "cnpj": "11826690000159",
+    "razao_social": "MAXCLEAN COMERCIO DE PRODUTOS DE LIMPEZA LTDA",
+    "fantasia": "MAXCLEAN",
+    "situacao": "ATIVA",
+    "simples_nacional": true,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:50:35"
+  },
+  "12428682000117": {
+    "cnpj": "12428682000117",
+    "razao_social": "FOLHAS VERDES QUALITY LTDA",
+    "fantasia": "FOLHAS VERDES",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:50:57"
+  },
+  "14101061000150": {
+    "cnpj": "14101061000150",
+    "razao_social": "ALPACK INDUSTRIA E COMERCIO DE EMBALAGENS LTDA",
+    "fantasia": "ALPACK EMBALAGENS",
+    "situacao": "ATIVA",
+    "simples_nacional": true,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:51:19"
+  },
+  "15874625000150": {
+    "cnpj": "15874625000150",
+    "razao_social": "J E C CHAGAS TILAPIAS LTDA",
+    "fantasia": "SO - TILAPIAS",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:51:42"
+  },
+  "20304808000170": {
+    "cnpj": "20304808000170",
+    "razao_social": "S. A. ALIMENTOS E EMBALAGENS LTDA",
+    "fantasia": "S. A. EMBALAGENS",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:52:04"
+  },
+  "21988620000150": {
+    "cnpj": "21988620000150",
+    "razao_social": "TOP CLEAN NORDESTE LTDA",
+    "fantasia": "TOP CLEAN",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:52:27"
+  },
+  "23913479000152": {
+    "cnpj": "23913479000152",
+    "razao_social": "NUTALL COMERCIO VAREJISTA DE ALIMENTOS EM GERAL LTDA",
+    "fantasia": "NUTALL ALIMENTOS",
+    "situacao": "ATIVA",
+    "simples_nacional": true,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:52:49"
+  },
+  "26616261000124": {
+    "cnpj": "26616261000124",
+    "razao_social": "NOVA REPPONTO COMERCIO E SERVICO DE RELOGIO E ACESSO LTDA",
+    "fantasia": "NOVA REPPONTO SISTEMAS INTELIGENTES",
+    "situacao": "ATIVA",
+    "simples_nacional": true,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:53:11"
+  },
+  "32044916000210": {
+    "cnpj": "32044916000210",
+    "razao_social": "NOVA ZELANDIA INDUSTRIA DE LACTEOS E COMERCIO DE ALIMENTOS LTDA",
+    "fantasia": "NOVA ZELANDIA LACTEOS",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:53:34"
+  },
+  "33205671000148": {
+    "cnpj": "33205671000148",
+    "razao_social": "MONDO ITALIA IMPORT EXPORT LTDA",
+    "fantasia": "MONDO ITALIA",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:53:56"
+  },
+  "34829295000125": {
+    "cnpj": "34829295000125",
+    "razao_social": "P S COLARES PAIVA DOCERIA",
+    "fantasia": "TOQUE DE MEL",
+    "situacao": "ATIVA",
+    "simples_nacional": true,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:54:18"
+  },
+  "35072271000137": {
+    "cnpj": "35072271000137",
+    "razao_social": "NETUNO ALIMENTOS LTDA",
+    "fantasia": "NETUMAR PESCADOS",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:54:41"
+  },
+  "35088657000480": {
+    "cnpj": "35088657000480",
+    "razao_social": "S V COMERCIO DE MATERIAL ELETRICO LTDA",
+    "fantasia": "SV ELETRICA EXPRESS",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:55:30"
+  },
+  "36119761000104": {
+    "cnpj": "36119761000104",
+    "razao_social": "J Y COMERCIO DE ALIMENTOS LTDA",
+    "fantasia": "ANAJU PRODUTOS NATURAIS",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:55:52"
+  },
+  "39688227000107": {
+    "cnpj": "39688227000107",
+    "razao_social": "SILVESTRE ORGANICOS DISTRIBUIDOR E PRODUTOR DE ALIMENTOS LTDA.",
+    "fantasia": "SILVESTRE ORGANICOS",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:56:15"
+  },
+  "41264146000121": {
+    "cnpj": "41264146000121",
+    "razao_social": "WJ COMERCIO DE EQUIPAMENTOS LTDA",
+    "fantasia": "WJ COMERCIO",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:56:37"
+  },
+  "41434556000173": {
+    "cnpj": "41434556000173",
+    "razao_social": "AVINE COMERCIAL E AVICOLA DO NORDESTE LTDA",
+    "fantasia": "",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:57:00"
+  },
+  "41595521000116": {
+    "cnpj": "41595521000116",
+    "razao_social": "C & M DISTRIBUIDORA DE CARNES LTDA",
+    "fantasia": "",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:57:22"
+  },
+  "42187000000192": {
+    "cnpj": "42187000000192",
+    "razao_social": "PLURAL DISTRIBUIDORA DE ALIMENTOS LTDA",
+    "fantasia": "PLURAL DISTRIBUIDORA DE ALIMENTOS",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:57:45"
+  },
+  "42434646000712": {
+    "cnpj": "42434646000712",
+    "razao_social": "PRASO PLATAFORMA DE COMERCIO LTDA.",
+    "fantasia": "",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:58:07"
+  },
+  "42434646000801": {
+    "cnpj": "42434646000801",
+    "razao_social": "PRASO PLATAFORMA DE COMERCIO LTDA.",
+    "fantasia": "",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:58:29"
+  },
+  "45707976000137": {
+    "cnpj": "45707976000137",
+    "razao_social": "VILLELA COMERCIO DE ALIMENTOS LTDA",
+    "fantasia": "VILLELA ALIMENTOS",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:58:52"
+  },
+  "45738114000171": {
+    "cnpj": "45738114000171",
+    "razao_social": "M M L DA S COMERCIO DE BEBIDAS LTDA",
+    "fantasia": "META DISTRIBUIDORA",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:59:14"
+  },
+  "46196098000103": {
+    "cnpj": "46196098000103",
+    "razao_social": "FACIL DISTRIBUIDORA LTDA",
+    "fantasia": "FACIL DISTRIBUIDORA",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 20:59:37"
+  },
+  "46355406000198": {
+    "cnpj": "46355406000198",
+    "razao_social": "46.355.406 CECY BUHAMRA PIRES",
+    "fantasia": "",
+    "situacao": "ATIVA",
+    "simples_nacional": true,
+    "simei": true,
+    "ultima_consulta": "2026-07-09 20:59:59"
+  },
+  "49978866000160": {
+    "cnpj": "49978866000160",
+    "razao_social": "DISTRIBUIDORA DE ALIMENTOS CEARENSE LTDA",
+    "fantasia": "DACE",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 21:00:22"
+  },
+  "49978866000241": {
+    "cnpj": "49978866000241",
+    "razao_social": "DISTRIBUIDORA DE ALIMENTOS CEARENSE LTDA",
+    "fantasia": "",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 21:00:44"
+  },
+  "51327980000172": {
+    "cnpj": "51327980000172",
+    "razao_social": "D. C. VIANA & F. P. NETO LTDA",
+    "fantasia": "",
+    "situacao": "ATIVA",
+    "simples_nacional": true,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 21:01:07"
+  },
+  "51991397000161": {
+    "cnpj": "51991397000161",
+    "razao_social": "51.991.397 ROBERTO SILVA DE SOUSA",
+    "fantasia": "",
+    "situacao": "ATIVA",
+    "simples_nacional": true,
+    "simei": true,
+    "ultima_consulta": "2026-07-09 21:01:29"
+  },
+  "60234415000151": {
+    "cnpj": "60234415000151",
+    "razao_social": "PEIXE CLUB COMERCIO IMPORTACAO E EXPORTACAO DE ATUM E FRUTOS DO MAR LTDA",
+    "fantasia": "PEIXE CLUB PESCADOS DO BRASIL",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 21:01:51"
+  },
+  "60409075012916": {
+    "cnpj": "60409075012916",
+    "razao_social": "NESTLE BRASIL LTDA.",
+    "fantasia": "",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 21:02:14"
+  },
+  "67620377005426": {
+    "cnpj": "67620377005426",
+    "razao_social": "MINERVA S.A.",
+    "fantasia": "MINERVA S.A.",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 21:02:36"
+  },
+  "73759185000196": {
+    "cnpj": "73759185000196",
+    "razao_social": "CIA DE GAS DO CEARA CEGAS",
+    "fantasia": "",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 21:02:59"
+  },
+  "73909566000104": {
+    "cnpj": "73909566000104",
+    "razao_social": "J A DISTRIBUIDORA LTDA",
+    "fantasia": "",
+    "situacao": "ATIVA",
+    "simples_nacional": false,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 21:03:21"
+  },
+  "97340970000178": {
+    "cnpj": "97340970000178",
+    "razao_social": "IRACILDA DE LIMA ROSSAS",
+    "fantasia": "PLASTIFORT",
+    "situacao": "ATIVA",
+    "simples_nacional": true,
+    "simei": false,
+    "ultima_consulta": "2026-07-09 21:03:44"
+  }
+}
