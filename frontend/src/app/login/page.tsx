@@ -1,15 +1,15 @@
 'use client'
 
 import { useState } from 'react'
-import { useAuth } from '@/lib/auth'
 import { useRouter } from 'next/navigation'
+
+const API_URL = '/api'
 
 export default function LoginPage() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
-  const { login } = useAuth()
   const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -17,7 +17,14 @@ export default function LoginPage() {
     setError('')
     setLoading(true)
     try {
-      await login(username, password)
+      const res = await fetch(`${API_URL}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      })
+      if (!res.ok) throw new Error('Usuário ou senha incorretos')
+      const data = await res.json()
+      localStorage.setItem('tribengine_token', data.access_token)
       router.push('/')
     } catch (err: any) {
       setError(err.message)

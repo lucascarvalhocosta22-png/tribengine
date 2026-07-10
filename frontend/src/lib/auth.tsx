@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import { createContext, useContext, useState, ReactNode } from 'react'
 
 const API_URL = '/api'
 const TOKEN_KEY = 'tribengine_token'
@@ -14,15 +14,12 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType)
 
-export function AuthProvider({ children }: { children: ReactNode }) {
-  const [token, setToken] = useState<string | null>(null)
-  const [loading, setLoading] = useState(true)
+function getStoredToken(): string | null {
+  try { return localStorage.getItem(TOKEN_KEY) } catch { return null }
+}
 
-  useEffect(() => {
-    const stored = localStorage.getItem(TOKEN_KEY)
-    if (stored) setToken(stored)
-    setLoading(false)
-  }, [])
+export function AuthProvider({ children }: { children: ReactNode }) {
+  const [token, setToken] = useState<string | null>(getStoredToken)
 
   const login = async (username: string, password: string) => {
     const res = await fetch(`${API_URL}/auth/login`, {
@@ -30,10 +27,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password }),
     })
-    if (!res.ok) {
-      const err = await res.text()
-      throw new Error(err.includes('incorretos') ? 'Usuário ou senha incorretos' : 'Erro ao autenticar')
-    }
+    if (!res.ok) throw new Error('Usuário ou senha incorretos')
     const data = await res.json()
     localStorage.setItem(TOKEN_KEY, data.access_token)
     setToken(data.access_token)
@@ -46,7 +40,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   return (
     <AuthContext.Provider value={{ token, login, logout, isAuthenticated: !!token }}>
-      {loading ? <div className="text-center py-20 text-gray-400">Carregando...</div> : children}
+      {children}
     </AuthContext.Provider>
   )
 }
@@ -56,8 +50,7 @@ export function useAuth() {
 }
 
 export function getToken(): string | null {
-  if (typeof window === 'undefined') return null
-  return localStorage.getItem(TOKEN_KEY)
+  return getStoredToken()
 }
 
 export function authFetch(path: string, options?: RequestInit) {

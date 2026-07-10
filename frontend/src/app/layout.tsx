@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import ClientLayout from './client-layout'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,7 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-BR">
       <body className={inter.className}>
-        <ClientLayout>
+        <div>
           <nav className="border-b border-gray-800 bg-[#0f172a] sticky top-0 z-50">
             <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
               <a href="/" className="flex items-center gap-2">
@@ -33,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           </nav>
           <main className="max-w-7xl mx-auto px-4 py-6">{children}</main>
-        </ClientLayout>
+        </div>
       </body>
     </html>
   )

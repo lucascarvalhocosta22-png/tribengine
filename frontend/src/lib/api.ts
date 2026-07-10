@@ -15,6 +15,10 @@ export async function apiFetch(path: string, options?: RequestInit) {
       ...options?.headers,
     },
   });
+  if (res.status === 401) {
+    if (typeof window !== 'undefined') window.location.href = '/login';
+    throw new Error('Não autorizado');
+  }
   if (!res.ok) {
     const err = await res.text();
     throw new Error(err);
