@@ -402,66 +402,74 @@ async def simular(req: SimulacaoRequest, db: Session = Depends(get_db)):
 
 @router.get("/dashboard")
 async def dashboard(db: Session = Depends(get_db)):
+    from sqlalchemy import func, case, and_, or_
+
     total_nfes = db.query(NFe).count()
     total_itens = db.query(ItemNFe).count()
 
-    itens = db.query(ItemNFe, NFe.tipo_declarado, NFe.simples_nacional).join(NFe, ItemNFe.nfe_id == NFe.id).all()
+    compra = and_(NFe.tipo_declarado == "compra")
+    venda = and_(NFe.tipo_declarado == "venda")
+    sn = NFe.simples_nacional == "Sim"
+    reducao = case((ItemNFe.cclass_trib.in_(["01.02.01", "200047"]), 0.6), else_=1.0)
 
-    def _is_compra(i, td): return (td == "compra") if td else (i.cfop[:1] in ["1", "2", "3"] if i.cfop else False)
-    def _is_venda(i, td): return (td == "venda") if td else (i.cfop[:1] in ["5", "6", "7"] if i.cfop else False)
-    def _fr(i): return 0.6 if i.cclass_trib in ("01.02.01", "200047") else 1.0
+    sums = db.query(
+        func.sum(ItemNFe.valor_ibms * reducao).label("total_ibms"),
+        func.sum(ItemNFe.valor_cbs * reducao).label("total_cbs"),
+        func.sum(ItemNFe.valor_is).label("total_is"),
+        func.sum(case((and_(compra, ~sn), ItemNFe.valor_ibms), else_=0)).label("ibs_credito"),
+        func.sum(case((and_(compra, ~sn), ItemNFe.valor_cbs), else_=0)).label("cbs_credito"),
+        func.sum(case((venda, ItemNFe.valor_ibms * reducao), else_=0)).label("ibs_debito"),
+        func.sum(case((venda, ItemNFe.valor_cbs * reducao), else_=0)).label("cbs_debito"),
+        func.sum(case((venda, ItemNFe.valor_is), else_=0)).label("is_debito"),
+        func.sum(case((compra, ItemNFe.valor_total), else_=0)).label("total_compras"),
+        func.sum(case((venda, ItemNFe.valor_total), else_=0)).label("total_vendas"),
+        func.count(case((ItemNFe.reducao_base > 0, 1))).label("com_reducao"),
+        func.count(case((or_(ItemNFe.imunidade == "Sim", ItemNFe.isencao == "Sim"), 1))).label("isentos"),
+        func.count(case((ItemNFe.monofasico == "Sim", 1))).label("monofasicos"),
+        func.count(case((ItemNFe.valor_is > 0, 1))).label("seletivos"),
+        func.count(case((ItemNFe.precisa_revisao == "Sim", 1))).label("pendentes"),
+    ).select_from(ItemNFe).join(NFe).first()
 
-    total_ibms = sum(i.valor_ibms * _fr(i) for i, _, _ in itens)
-    total_cbs = sum(i.valor_cbs * _fr(i) for i, _, _ in itens)
-    total_is = sum(i.valor_is for i, _, _ in itens)
+    total_ibms = sums.total_ibms or 0
+    total_cbs = sums.total_cbs or 0
+    total_is = sums.total_is or 0
+    ibs_credito = sums.ibs_credito or 0
+    cbs_credito = sums.cbs_credito or 0
+    ibs_debito = sums.ibs_debito or 0
+    cbs_debito = sums.cbs_debito or 0
+    is_debito = sums.is_debito or 0
+    total_compras = sums.total_compras or 0
+    total_vendas = sums.total_vendas or 0
+    com_reducao = sums.com_reducao or 0
+    isentos = sums.isentos or 0
+    monofasicos = sums.monofasicos or 0
+    seletivos = sums.seletivos or 0
+    pendentes = sums.pendentes or 0
 
-    ibs_credito = sum(i.valor_ibms for i, td, sn in itens if _is_compra(i, td) and sn != "Sim")
-    cbs_credito = sum(i.valor_cbs for i, td, sn in itens if _is_compra(i, td) and sn != "Sim")
-    ibs_debito = sum(i.valor_ibms * _fr(i) for i, td, _ in itens if _is_venda(i, td))
-    cbs_debito = sum(i.valor_cbs * _fr(i) for i, td, _ in itens if _is_venda(i, td))
-    is_debito = sum(i.valor_is for i, td, _ in itens if _is_venda(i, td))
-    total_compras = sum(i.valor_total for i, td, _ in itens if _is_compra(i, td))
-    total_vendas = sum(i.valor_total for i, td, _ in itens if _is_venda(i, td))
+    fornecedores_sn = db.query(NFe.remetente_cnpj).filter(sn, compra).distinct().count()
+    compras_sem_credito = db.query(ItemNFe).join(NFe).filter(sn, compra).count()
+
+    motivos_data = db.query(
+        case(
+            (sn, "Simples Nacional"),
+            (ItemNFe.cesta_basica == "Sim", "Cesta Básica"),
+            (ItemNFe.aliquota_zero == "Sim", "Alíquota Zero"),
+            (ItemNFe.imunidade == "Sim", "Imunidade"),
+            (ItemNFe.isencao == "Sim", "Isenção"),
+            (ItemNFe.monofasico == "Sim", "Monofásico"),
+            (ItemNFe.suspensao == "Sim", "Suspensão"),
+            else_="Alíquota Efetiva Zero",
+        ).label("motivo"),
+        func.count(ItemNFe.id).label("itens"),
+        func.sum(ItemNFe.valor_total).label("valor"),
+    ).join(NFe).filter(compra, ItemNFe.valor_ibms == 0, ItemNFe.valor_cbs == 0).group_by("motivo").all()
+
+    sem_credito_motivos = [{"motivo": m.motivo, "itens": m.itens, "valor": round(m.valor or 0, 2)} for m in motivos_data]
+    compras_sem_credito_total = sum(m["itens"] for m in sem_credito_motivos)
+    compras_sem_credito_valor = round(sum(m["valor"] for m in sem_credito_motivos), 2)
+
     total_creditos = ibs_credito + cbs_credito
     total_debitos = ibs_debito + cbs_debito + is_debito
-
-    com_reducao = sum(1 for i, _, _ in itens if i.reducao_base > 0)
-    isentos = sum(1 for i, _, _ in itens if i.imunidade == "Sim" or i.isencao == "Sim")
-    monofasicos = sum(1 for i, _, _ in itens if i.monofasico == "Sim")
-    seletivos = sum(1 for i, _, _ in itens if i.valor_is > 0)
-    pendentes = sum(1 for i, _, _ in itens if i.precisa_revisao == "Sim")
-
-    fornecedores_sn = db.query(NFe.remetente_cnpj).filter(NFe.simples_nacional == "Sim", NFe.tipo_declarado == "compra").distinct().count()
-    compras_sem_credito = db.query(ItemNFe).join(NFe).filter(NFe.simples_nacional == "Sim", NFe.tipo_declarado == "compra").count()
-
-    compras_itens_all = db.query(ItemNFe, NFe).join(NFe, ItemNFe.nfe_id == NFe.id).filter(NFe.tipo_declarado == "compra").all()
-    sem_credito_motivos = {}
-    for item, nfe in compras_itens_all:
-        gerou = (item.valor_ibms or 0) > 0 or (item.valor_cbs or 0) > 0
-        if gerou:
-            continue
-        if nfe.simples_nacional == "Sim":
-            motivo = "Simples Nacional"
-        elif item.cesta_basica == "Sim":
-            motivo = "Cesta Básica"
-        elif item.aliquota_zero == "Sim":
-            motivo = "Alíquota Zero"
-        elif item.imunidade == "Sim":
-            motivo = "Imunidade"
-        elif item.isencao == "Sim":
-            motivo = "Isenção"
-        elif item.monofasico == "Sim":
-            motivo = "Monofásico"
-        elif item.suspensao == "Sim":
-            motivo = "Suspensão"
-        else:
-            motivo = "Alíquota Efetiva Zero"
-        if motivo not in sem_credito_motivos:
-            sem_credito_motivos[motivo] = {"itens": 0, "valor": 0}
-        sem_credito_motivos[motivo]["itens"] += 1
-        sem_credito_motivos[motivo]["valor"] += item.valor_total or 0
-    compras_sem_credito_total = sum(v["itens"] for v in sem_credito_motivos.values())
-    compras_sem_credito_valor = round(sum(v["valor"] for v in sem_credito_motivos.values()), 2)
 
     carga_tributaria = total_ibms + total_cbs + total_is
     receita_total = total_vendas if total_vendas > 0 else 1
@@ -499,10 +507,7 @@ async def dashboard(db: Session = Depends(get_db)):
         "compras_sem_credito_sn": compras_sem_credito,
         "compras_sem_credito_total": compras_sem_credito_total,
         "compras_sem_credito_valor": compras_sem_credito_valor,
-        "compras_sem_credito_motivos": [
-            {"motivo": k, "itens": v["itens"], "valor": round(v["valor"], 2)}
-            for k, v in sorted(sem_credito_motivos.items(), key=lambda x: -x[1]["itens"])
-        ],
+        "compras_sem_credito_motivos": sorted(sem_credito_motivos, key=lambda x: -x["itens"]),
     }
 
 

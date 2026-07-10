@@ -11,8 +11,12 @@ services:
         fromDatabase:
           name: tribengine-db
           property: connectionString
-      - key: PORT
-        value: "8000"
+      - key: SECRET_KEY
+        sync: false
+      - key: ADMIN_USERNAME
+        value: admin
+      - key: ADMIN_PASSWORD
+        sync: false
 
 databases:
   - name: tribengine-db

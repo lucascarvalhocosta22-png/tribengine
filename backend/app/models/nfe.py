@@ -29,9 +29,9 @@ class NFe(Base):
     valor_total_tributos = Column(Float)
     natureza_operacao = Column(String(255))
     tipo_operacao = Column(String(1))
-    tipo_declarado = Column(String(10))
+    tipo_declarado = Column(String(10), index=True)
     finalidade = Column(String(1))
-    simples_nacional = Column(String(3), default="Nao")
+    simples_nacional = Column(String(3), default="Nao", index=True)
     xml_original = Column(Text)
     created_at = Column(DateTime, default=lambda: datetime.now(UTC))
 
@@ -72,8 +72,8 @@ class ItemNFe(Base):
     base_ibms = Column(Float, default=0)
     base_cbs = Column(Float, default=0)
     base_is = Column(Float, default=0)
-    valor_ibms = Column(Float, default=0)
-    valor_cbs = Column(Float, default=0)
+    valor_ibms = Column(Float, default=0, index=True)
+    valor_cbs = Column(Float, default=0, index=True)
     valor_is = Column(Float, default=0)
 
     incidencia_ibms = Column(String(50))
