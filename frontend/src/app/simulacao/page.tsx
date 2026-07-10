@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { listNfes, simular } from '@/lib/api'
+import { listNfes, simular, apiFetch } from '@/lib/api'
 import { formatCurrency, MESES } from '@/lib/utils'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, PieChart, Pie, Cell } from 'recharts'
 
@@ -71,13 +71,10 @@ export default function SimulacaoPage() {
             reducao_vendas: manualRedVenda,
           },
         }
-        const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1'
-        const res = await fetch(`${API}/simular`, {
-          method: 'POST', headers: { 'Content-Type': 'application/json' },
+        r = await apiFetch('/simular', {
+          method: 'POST',
           body: JSON.stringify(body),
         })
-        if (!res.ok) { const t = await res.text(); throw new Error(t) }
-        r = await res.json()
       } else {
         r = await simular({
           nome: `Simulação - ${REGIMES.find(r => r.value === regime)?.label}`,

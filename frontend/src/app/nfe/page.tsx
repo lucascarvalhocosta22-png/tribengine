@@ -6,6 +6,18 @@ import { formatCurrency, formatDate } from '@/lib/utils'
 
 const API_URL = '/api'
 
+function authFetch(url: string, opts?: RequestInit) {
+  const token = typeof window !== 'undefined' ? localStorage.getItem('tribengine_token') : null
+  return fetch(url, {
+    ...opts,
+    headers: {
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...(opts?.headers || {}),
+      ...(opts?.body instanceof FormData ? {} : { 'Content-Type': 'application/json' }),
+    },
+  })
+}
+
 export default function NFePage() {
   const [nfes, setNfes] = useState<any[]>([])
   const [selected, setSelected] = useState<any>(null)
@@ -40,7 +52,7 @@ export default function NFePage() {
           try {
             const fd = new FormData(); fd.append('file', file)
             const url = file.name.endsWith('.zip') ? `/upload/zip` : `/upload/xml`
-            const res = await fetch(`${API_URL}${url}?tipo=${tipo}`, { method: 'POST', body: fd })
+            const res = await authFetch(`${API_URL}${url}?tipo=${tipo}`, { method: 'POST', body: fd })
             if (!res.ok) { const e = await res.text(); throw new Error(e) }
             ok++
           } catch (e: any) { fail++; err = `${file.name}: ${e.message}` }
@@ -50,7 +62,7 @@ export default function NFePage() {
       const fd = new FormData()
       for (const f of batchFiles) fd.append('files', f)
       try {
-        const res = await fetch(`${API_URL}/upload/batch?tipo=${tipo}`, { method: 'POST', body: fd })
+        const res = await authFetch(`${API_URL}/upload/batch?tipo=${tipo}`, { method: 'POST', body: fd })
         const r = await res.json()
         if (!res.ok) throw new Error(r.detail || 'Erro batch')
         const ok = r.resultados?.filter((x: any) => x.sucesso).length || 0
@@ -97,7 +109,7 @@ export default function NFePage() {
   const handleDeleteAll = async () => {
     if (!confirm(`Deletar TODAS as ${nfes.length} NF-es? Isso não pode ser desfeito.`)) return
     try {
-      await fetch(`${API_URL}/nfe`, { method: 'DELETE' })
+      await authFetch(`${API_URL}/nfe`, { method: 'DELETE' })
       setSelected(null)
       setMsg('Todas as NF-es foram deletadas.')
       load()

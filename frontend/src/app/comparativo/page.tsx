@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { formatCurrency, formatPercent } from '@/lib/utils'
-
-const API_URL = '/api'
+import { apiFetch } from '@/lib/api'
 
 export default function ComparativoPage() {
   const [data, setData] = useState<any>(null)
@@ -11,7 +10,7 @@ export default function ComparativoPage() {
   const [apenas5102, setApenas5102] = useState(false)
 
   useEffect(() => {
-    fetch(`${API_URL}/comparativo/old-new`).then(r => r.json()).then(setData).catch(console.error).finally(() => setLoading(false))
+    apiFetch('/comparativo/old-new').then(setData).catch(console.error).finally(() => setLoading(false))
   }, [])
 
   if (loading) return <div className="text-center py-20 text-gray-400">Carregando...</div>

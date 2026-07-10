@@ -1,7 +1,8 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import engine, Base
 from app.api.routes import router as api_router
+from app.api.auth import router as auth_router, get_current_user
 
 Base.metadata.create_all(bind=engine)
 
@@ -21,7 +22,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(api_router, prefix="/api/v1")
+app.include_router(auth_router, prefix="/api/v1/auth")
+app.include_router(api_router, prefix="/api/v1", dependencies=[Depends(get_current_user)])
 
 
 @app.get("/health")

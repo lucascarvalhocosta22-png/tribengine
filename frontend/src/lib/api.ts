@@ -1,9 +1,19 @@
 const API_URL = '/api';
 
+function getToken(): string | null {
+  if (typeof window === 'undefined') return null;
+  return localStorage.getItem('tribengine_token');
+}
+
 export async function apiFetch(path: string, options?: RequestInit) {
+  const token = getToken();
   const res = await fetch(`${API_URL}${path}`, {
-    headers: { 'Content-Type': 'application/json', ...options?.headers },
     ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...options?.headers,
+    },
   });
   if (!res.ok) {
     const err = await res.text();
@@ -15,8 +25,10 @@ export async function apiFetch(path: string, options?: RequestInit) {
 export async function uploadXml(file: File) {
   const formData = new FormData();
   formData.append('file', file);
+  const token = getToken();
   const res = await fetch(`${API_URL}/upload/xml`, {
     method: 'POST',
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
     body: formData,
   });
   if (!res.ok) {
@@ -29,8 +41,10 @@ export async function uploadXml(file: File) {
 export async function uploadZip(file: File) {
   const formData = new FormData();
   formData.append('file', file);
+  const token = getToken();
   const res = await fetch(`${API_URL}/upload/zip`, {
     method: 'POST',
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
     body: formData,
   });
   if (!res.ok) {

@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { formatCurrency } from '@/lib/utils'
-
-const API_URL = '/api'
+import { apiFetch } from '@/lib/api'
 
 export default function CreditoPage() {
   const [data, setData] = useState<any>(null)
@@ -12,7 +11,7 @@ export default function CreditoPage() {
   const [busca, setBusca] = useState('')
 
   useEffect(() => {
-    fetch(`${API_URL}/credito/analise`).then(r => r.json()).then(setData).catch(console.error).finally(() => setLoading(false))
+    apiFetch('/credito/analise').then(setData).catch(console.error).finally(() => setLoading(false))
   }, [])
 
   if (loading) return <div className="text-center py-20 text-gray-400">Carregando...</div>
