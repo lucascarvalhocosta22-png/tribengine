@@ -135,7 +135,7 @@ class TribAIEngine:
 
     def _resolver_ncm_tabela(self, ncm_limpo: str) -> tuple:
         if not ncm_limpo or len(ncm_limpo) < 4:
-            return None
+            return "01.25.01", 65.0
         oficial = self._buscar_cclasstrib_por_ncm_tabela(ncm_limpo)
         if oficial:
             user_map = {
@@ -146,7 +146,7 @@ class TribAIEngine:
             }
             mapped = user_map.get(oficial, "000001")
             return mapped, 100.0
-        return None
+        return "01.25.01", 65.0
 
     def _determinar_cst(self, cclasstrib: str, cfop: str) -> dict:
         result = {"cst_ibms": "00", "cst_cbs": "00", "cst_is": "00"}
