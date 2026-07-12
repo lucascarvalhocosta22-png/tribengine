@@ -771,13 +771,13 @@ async def comparativo_old_new(db: Session = Depends(get_db)):
     ibs_outros = sum((i.valor_ibms or 0) * _fr(i.cclass_trib) for i, _ in itens if i.cfop not in ("5102", "5405"))
     cbs_outros = sum((i.valor_cbs or 0) * _fr(i.cclass_trib) for i, _ in itens if i.cfop not in ("5102", "5405"))
 
-    # Old system: ICMS 4.15% on 5102, 0% on 5405; PIS/COFINS 3.15% on 5102, 0% on 5405
+    # Old system: ICMS 4.15% on 5102, 0% on 5405; PIS/COFINS 3.65% on 5102, 0% on 5405
     icms_5102 = round(total_5102 * 0.0415, 2)
     icms_5405 = 0
     icms_outros = round(outros * 0.0415, 2)
-    pis_cofins_5102 = round(total_5102 * 0.0315, 2)
+    pis_cofins_5102 = round(total_5102 * 0.0365, 2)
     pis_cofins_5405 = 0
-    pis_cofins_outros = round(outros * 0.0315, 2)
+    pis_cofins_outros = round(outros * 0.0365, 2)
 
     novo_5102 = round(ibs_5102 + cbs_5102, 2)
     novo_5405 = round(ibs_5405 + cbs_5405, 2)
