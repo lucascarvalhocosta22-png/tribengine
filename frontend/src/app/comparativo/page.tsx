@@ -26,7 +26,7 @@ export default function ComparativoPage() {
     <div>
       <h1 className="text-2xl font-bold mb-2">Comparativo: Sistema Antigo vs Reforma</h1>
       <p className="text-sm text-gray-400 mb-6">
-        Comparação entre PIS/COFINS (sistema atual) e IBS/CBS (reforma tributária) sobre as vendas
+        Comparação entre ICMS + PIS/COFINS (sistema atual) e IBS/CBS (reforma tributária) sobre as vendas
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
@@ -89,9 +89,12 @@ export default function ComparativoPage() {
                   </div>
                 </div>
                 <div className="text-center p-3 bg-gray-800 rounded-lg">
-                  <div className="text-xs text-gray-400">Novo IBS</div>
-                  <div className="font-semibold text-blue-300">{formatCurrency(cfop.novo_ibs)}</div>
-                  <div className="text-xs text-gray-500">+ CBS {formatCurrency(cfop.novo_cbs)}</div>
+                  <div className="text-xs text-gray-400">Novo IBS + CBS</div>
+                  <div className="text-sm">
+                    <div className="text-blue-300">IBS: {formatCurrency(cfop.novo_ibs)}</div>
+                    <div className="text-blue-200">CBS: {formatCurrency(cfop.novo_cbs)}</div>
+                    <div className="text-white font-semibold mt-1">Total: {formatCurrency(cfop.novo_total)}</div>
+                  </div>
                 </div>
                 <div className={`text-center p-3 rounded-lg ${isPositive ? 'bg-orange-900/50' : 'bg-green-900/50'}`}>
                   <div className="text-xs text-gray-400">Diferença</div>
