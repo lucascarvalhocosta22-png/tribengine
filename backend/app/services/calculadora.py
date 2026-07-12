@@ -192,7 +192,7 @@ class CalculadoraTributaria:
             for item in itens
         )
         pis_cofins_total = sum(
-            item.get("valor_total", 0) * (0.0465 if item.get("cfop") == "5102" else 0)
+            item.get("valor_total", 0) * (0.0315 if item.get("cfop") == "5102" else 0)
             for item in itens
         )
         total_antigo = round(icms_total + pis_cofins_total, 2)

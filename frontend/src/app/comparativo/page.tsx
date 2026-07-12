@@ -18,7 +18,7 @@ export default function ComparativoPage() {
 
   const cfops = ['cfop_5102', 'cfop_5405', 'outros_cfop']
   const labels: any = { cfop_5102: 'CFOP 5102 (Venda Normal)', cfop_5405: 'CFOP 5405 (Alíq. Zero)', outros_cfop: 'Outros CFOPs' }
-  const oldLabels: any = { cfop_5102: 'ICMS 4,15% + PIS/COFINS 4,65%', cfop_5405: 'ICMS 0% + PIS/COFINS 0%', outros_cfop: 'ICMS 4,15% + PIS/COFINS 4,65%' }
+  const oldLabels: any = { cfop_5102: 'ICMS 4,15% + PIS/COFINS 3,15%', cfop_5405: 'ICMS 0% + PIS/COFINS 0%', outros_cfop: 'ICMS 4,15% + PIS/COFINS 3,15%' }
 
   const activeCfops = apenas5102 ? ['cfop_5102'] : cfops
 
@@ -137,7 +137,7 @@ export default function ComparativoPage() {
         <div className="text-sm text-gray-300 space-y-2">
           <p><strong className="text-blue-400">Sistema Antigo (ICMS + PIS/COFINS):</strong></p>
           <ul className="list-disc list-inside text-gray-400 ml-4 space-y-1">
-            <li>CFOP 5102 (venda normal): ICMS <strong className="text-white">4,15%</strong> + PIS/COFINS <strong className="text-white">4,65%</strong> = 8,80%</li>
+            <li>CFOP 5102 (venda normal): ICMS <strong className="text-white">4,15%</strong> + PIS/COFINS <strong className="text-white">3,15%</strong> = 7,30%</li>
             <li>CFOP 5405/5403 (alíquota zero): ICMS <strong className="text-white">0%</strong> + PIS/COFINS <strong className="text-white">0%</strong></li>
           </ul>
           <p className="mt-3"><strong className="text-orange-400">Novo Sistema (IBS/CBS):</strong></p>
