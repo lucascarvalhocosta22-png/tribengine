@@ -18,7 +18,7 @@ export default function ComparativoPage() {
 
   const cfops = ['cfop_5102', 'cfop_5405', 'outros_cfop']
   const labels: any = { cfop_5102: 'CFOP 5102 (Venda Normal)', cfop_5405: 'CFOP 5405 (Alíq. Zero)', outros_cfop: 'Outros CFOPs' }
-  const oldLabels: any = { cfop_5102: 'PIS/COFINS 4,65%', cfop_5405: 'PIS/COFINS 0% (Alíq. Zero)', outros_cfop: 'PIS/COFINS 4,65%' }
+  const oldLabels: any = { cfop_5102: 'ICMS 4,15% + PIS/COFINS 4,65%', cfop_5405: 'ICMS 0% + PIS/COFINS 0%', outros_cfop: 'ICMS 4,15% + PIS/COFINS 4,65%' }
 
   const activeCfops = apenas5102 ? ['cfop_5102'] : cfops
 
@@ -36,7 +36,7 @@ export default function ComparativoPage() {
           <div className="text-xs text-gray-500 mt-1">{data.total_geral?.total_itens} itens</div>
         </div>
         <div className="card text-center border-blue-700">
-          <div className="text-xs text-gray-400 uppercase tracking-wide mb-2">PIS/COFINS (Sistema Antigo)</div>
+          <div className="text-xs text-gray-400 uppercase tracking-wide mb-2">ICMS + PIS/COFINS (Sistema Antigo)</div>
           <div className="text-2xl font-bold text-blue-400">{formatCurrency(data.total_geral?.antigo_total)}</div>
           <div className="text-xs text-gray-500 mt-1">Alíquota efetiva:{' '}
             {formatPercent((data.total_geral?.antigo_total / data.total_geral?.total_vendas * 100) || 0)}
@@ -82,7 +82,11 @@ export default function ComparativoPage() {
                 </div>
                 <div className="text-center p-3 bg-gray-800 rounded-lg">
                   <div className="text-xs text-gray-400">{oldLabels[key]}</div>
-                  <div className="font-semibold text-blue-400">{formatCurrency(cfop.antigo_pis_cofins)}</div>
+                  <div className="text-sm">
+                    <div className="text-blue-300">ICMS: {formatCurrency(cfop.antigo_icms)}</div>
+                    <div className="text-blue-400">PIS/COFINS: {formatCurrency(cfop.antigo_pis_cofins)}</div>
+                    <div className="text-white font-semibold mt-1">Total: {formatCurrency(cfop.antigo_total)}</div>
+                  </div>
                 </div>
                 <div className="text-center p-3 bg-gray-800 rounded-lg">
                   <div className="text-xs text-gray-400">Novo IBS</div>
@@ -131,10 +135,10 @@ export default function ComparativoPage() {
       <div className="mt-6 card">
         <h2 className="text-lg font-semibold mb-4">Entendendo a Comparação</h2>
         <div className="text-sm text-gray-300 space-y-2">
-          <p><strong className="text-blue-400">Sistema Antigo (PIS/COFINS):</strong></p>
+          <p><strong className="text-blue-400">Sistema Antigo (ICMS + PIS/COFINS):</strong></p>
           <ul className="list-disc list-inside text-gray-400 ml-4 space-y-1">
-            <li>CFOP 5102 (venda normal): alíquota de <strong className="text-white">4,65%</strong> sobre o faturamento</li>
-            <li>CFOP 5405 (venda alíquota zero): <strong className="text-white">0%</strong> — não paga PIS/COFINS</li>
+            <li>CFOP 5102 (venda normal): ICMS <strong className="text-white">4,15%</strong> + PIS/COFINS <strong className="text-white">4,65%</strong> = 8,80%</li>
+            <li>CFOP 5405/5403 (alíquota zero): ICMS <strong className="text-white">0%</strong> + PIS/COFINS <strong className="text-white">0%</strong></li>
           </ul>
           <p className="mt-3"><strong className="text-orange-400">Novo Sistema (IBS/CBS):</strong></p>
           <ul className="list-disc list-inside text-gray-400 ml-4 space-y-1">

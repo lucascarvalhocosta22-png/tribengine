@@ -187,16 +187,22 @@ class CalculadoraTributaria:
         carga_tributaria_total = ibs_debito + cbs_debito + is_debito
         receita_total = total_vendas if total_vendas > 0 else 1
 
+        icms_total = sum(
+            item.get("valor_total", 0) * (0.0415 if item.get("cfop") == "5102" else 0)
+            for item in itens
+        )
         pis_cofins_total = sum(
             item.get("valor_total", 0) * (0.0465 if item.get("cfop") == "5102" else 0)
             for item in itens
         )
+        total_antigo = round(icms_total + pis_cofins_total, 2)
         comparativo_sistema_antigo = {
+            "icms": round(icms_total, 2),
             "pis_cofins": round(pis_cofins_total, 2),
-            "total_antigo": round(pis_cofins_total, 2),
+            "total_antigo": total_antigo,
             "total_novo": round(carga_tributaria_total, 2),
-            "economia": round(pis_cofins_total - carga_tributaria_total, 2),
-            "reducao_percentual": round(((pis_cofins_total - carga_tributaria_total) / max(1, pis_cofins_total) * 100), 2),
+            "economia": round(total_antigo - carga_tributaria_total, 2),
+            "reducao_percentual": round(((total_antigo - carga_tributaria_total) / max(1, total_antigo) * 100), 2),
         }
         economia_tributaria = comparativo_sistema_antigo["economia"]
 

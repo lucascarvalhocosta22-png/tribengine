@@ -771,7 +771,10 @@ async def comparativo_old_new(db: Session = Depends(get_db)):
     ibs_outros = sum((i.valor_ibms or 0) * _fr(i.cclass_trib) for i, _ in itens if i.cfop not in ("5102", "5405"))
     cbs_outros = sum((i.valor_cbs or 0) * _fr(i.cclass_trib) for i, _ in itens if i.cfop not in ("5102", "5405"))
 
-    # Old system: PIS/COFINS 4.65% on 5102, 0% on 5405
+    # Old system: ICMS 4.15% on 5102, 0% on 5405; PIS/COFINS 4.65% on 5102, 0% on 5405
+    icms_5102 = round(total_5102 * 0.0415, 2)
+    icms_5405 = 0
+    icms_outros = round(outros * 0.0415, 2)
     pis_cofins_5102 = round(total_5102 * 0.0465, 2)
     pis_cofins_5405 = 0
     pis_cofins_outros = round(outros * 0.0465, 2)
@@ -780,43 +783,54 @@ async def comparativo_old_new(db: Session = Depends(get_db)):
     novo_5405 = round(ibs_5405 + cbs_5405, 2)
     novo_outros = round(ibs_outros + cbs_outros, 2)
 
+    def _antigo_total(icms, pc): return round(icms + pc, 2)
+    antigo_5102 = _antigo_total(icms_5102, pis_cofins_5102)
+    antigo_5405 = _antigo_total(icms_5405, pis_cofins_5405)
+    antigo_outros = _antigo_total(icms_outros, pis_cofins_outros)
+
     return {
         "cfop_5102": {
             "total": round(total_5102, 2),
             "itens": sum(1 for i, _ in itens if i.cfop == "5102"),
+            "antigo_icms": icms_5102,
             "antigo_pis_cofins": pis_cofins_5102,
+            "antigo_total": antigo_5102,
             "novo_ibs": round(ibs_5102, 2),
             "novo_cbs": round(cbs_5102, 2),
             "novo_total": novo_5102,
-            "diferenca": round(novo_5102 - pis_cofins_5102, 2),
-            "variacao_percentual": round(((novo_5102 - pis_cofins_5102) / pis_cofins_5102 * 100) if pis_cofins_5102 else 0, 2),
+            "diferenca": round(novo_5102 - antigo_5102, 2),
+            "variacao_percentual": round(((novo_5102 - antigo_5102) / antigo_5102 * 100) if antigo_5102 else 0, 2),
         },
         "cfop_5405": {
             "total": round(total_5405, 2),
             "itens": sum(1 for i, _ in itens if i.cfop == "5405"),
+            "antigo_icms": icms_5405,
             "antigo_pis_cofins": pis_cofins_5405,
+            "antigo_total": antigo_5405,
             "novo_ibs": round(ibs_5405, 2),
             "novo_cbs": round(cbs_5405, 2),
             "novo_total": novo_5405,
-            "diferenca": round(novo_5405 - pis_cofins_5405, 2),
-            "variacao_percentual": round(((novo_5405 - pis_cofins_5405) / max(1, pis_cofins_5405)) * 100, 2),
+            "diferenca": round(novo_5405 - antigo_5405, 2),
+            "variacao_percentual": round(((novo_5405 - antigo_5405) / max(1, antigo_5405)) * 100, 2),
         },
         "outros_cfop": {
             "total": round(outros, 2),
             "itens": sum(1 for i, _ in itens if i.cfop not in ("5102", "5405")),
+            "antigo_icms": icms_outros,
             "antigo_pis_cofins": pis_cofins_outros,
+            "antigo_total": antigo_outros,
             "novo_ibs": round(ibs_outros, 2),
             "novo_cbs": round(cbs_outros, 2),
             "novo_total": novo_outros,
-            "diferenca": round(novo_outros - pis_cofins_outros, 2),
-            "variacao_percentual": round(((novo_outros - pis_cofins_outros) / max(1, pis_cofins_outros)) * 100, 2),
+            "diferenca": round(novo_outros - antigo_outros, 2),
+            "variacao_percentual": round(((novo_outros - antigo_outros) / max(1, antigo_outros)) * 100, 2),
         },
         "total_geral": {
             "total_vendas": round(total_5102 + total_5405 + outros, 2),
             "total_itens": len(itens),
-            "antigo_total": round(pis_cofins_5102 + pis_cofins_5405 + pis_cofins_outros, 2),
+            "antigo_total": round(antigo_5102 + antigo_5405 + antigo_outros, 2),
             "novo_total": round(novo_5102 + novo_5405 + novo_outros, 2),
-            "diferenca_total": round(novo_5102 + novo_5405 + novo_outros - pis_cofins_5102 - pis_cofins_5405 - pis_cofins_outros, 2),
+            "diferenca_total": round(novo_5102 + novo_5405 + novo_outros - antigo_5102 - antigo_5405 - antigo_outros, 2),
         },
         "creditos_compra": {
             "ibs_credito": round(sum(i.valor_ibms or 0 for i, n in itens_compra if nfe_sn.get(n.id, "Nao") != "Sim"), 2),
